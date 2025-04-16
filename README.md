@@ -50,7 +50,3 @@
    ```
 
 Your Laravel app should now be running at `http://127.0.0.1:8000`.
-
----
-
-Let me know if you want a version for Docker-based setup or deployment instructions too!
