@@ -7,7 +7,7 @@
             <div class="flex text-sm">
                 <a href="index.html" class="text-gray-600 hover:text-emerald-600">Home</a>
                 <span class="mx-2 text-gray-400">/</span>
-                <a href="categories.html" class="text-gray-600 hover:text-emerald-600">Electronics</a>
+                <a href="{{ route('products.index') }}?category={{ $product->category->name }}" class="text-gray-600 hover:text-emerald-600">{{ $product->category->name }}</a>
                 <span class="mx-2 text-gray-400">/</span>
                 <span class="text-gray-800">{{ $product->name }}</span>
             </div>
@@ -40,11 +40,15 @@
                     <h1 class="text-3xl font-bold mb-2">{{ $product->name }}</h1>
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                            @for ($i = 0; $i < 5; $i++)
+                                @if (floor($product->average_rating) - $i >= 1)
+                                    <i class="fas fa-star"></i>
+                                @elseif ($product->average_rating - $i > 0)
+                                    <i class="fas fa-star-half-alt"></i>
+                                @else
+                                    <i class="far fa-star text-gray-300"></i>
+                                @endif
+                            @endfor
                         </div>
                         <span class="text-gray-600">4.5 ({{ $product->reviews->count() }} reviews)</span>
                     </div>

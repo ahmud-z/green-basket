@@ -9,12 +9,23 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::get();
 
-        return view('products', compact('products'));
+        $categories = Category::all();
+
+        $products = Product::query();
+
+        if (request()->has('category')) {
+            $products->whereHas('category', function($query) {
+                $query->where('name', request()->get('category'));
+            });
+        }
+
+        $products = $products->paginate(9)->withQueryString();
+
+        return view('pages.products.index', compact('products', 'categories'));
     }
 
-    public function details($productId)
+    public function show($productId)
     {
         $product = Product::findOrFail($productId)->load('category');
 
@@ -22,6 +33,6 @@ class ProductController extends Controller
             ->limit(8)
             ->get();
 
-        return view('product-details', compact('product', 'relatedProducts'));
+        return view('pages.products.show', compact('product', 'relatedProducts'));
     }
 }
