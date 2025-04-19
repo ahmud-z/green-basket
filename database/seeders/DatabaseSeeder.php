@@ -19,24 +19,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-//        User::factory()->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//        ]);
-
+        //        User::factory()->create([
+        //            'name' => 'Test User',
+        //            'email' => 'test@example.com',
+        //        ]);
 
         $categories = [
-            "fragrances",
-            "furniture",
-            "groceries",
-            "home-decoration",
-            "kitchen-accessories",
-            "skin-care",
-            "sunglasses",
+            'fragrances',
+            'furniture',
+            'groceries',
+            'home-decoration',
+            'kitchen-accessories',
+            'skin-care',
+            'sunglasses',
         ];
 
         foreach ($categories as $category) {
-            $response = Http::get('https://dummyjson.com/products/category/' . $category . '?limit=1000')->json();
+            $response = Http::get('https://dummyjson.com/products/category/'.$category.'?limit=1000')->json();
 
             $category = Category::firstOrCreate([
                 'name' => Str::ucfirst(Str::replace('-', ' ', $category)),
