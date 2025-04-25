@@ -1,7 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs'
 import cart from "./alpine-apps/cart.js";
-import checkout from "./alpine-apps/checkout.js";
 import productDetail from "./alpine-apps/product-detail.js";
 import {mask} from "@alpinejs/mask";
 
