@@ -9,7 +9,7 @@
                 <div class="md:w-1/2 mb-8 md:mb-0">
                     <h1 class="text-4xl md:text-5xl font-bold mb-4">Shop the Latest Trends</h1>
                     <p class="text-lg mb-6">Discover our curated collection of products at unbeatable prices.</p>
-                    <a href="products.html" class="bg-emerald-600 text-white px-6 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Shop Now</a>
+                    <a href="{{ route('products.index') }}" class="bg-emerald-600 text-white px-6 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Shop Now</a>
                 </div>
                 <div class="md:w-1/2">
                     <img src="https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0-Deploy-Release-757/Default/stores/chaldal/components/landingPage2/LandingPage/images/imageBanner.png?q=low&webp=1" alt="Hero Image">

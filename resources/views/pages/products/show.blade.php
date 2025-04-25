@@ -15,7 +15,7 @@
     </div>
 
     <!-- Product Detail -->
-    <section class="py-12" x-data="productDetail">
+    <section class="py-12" x-data>
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row -mx-4">
                 <!-- Product Images -->
@@ -63,15 +63,15 @@
                     <div class="mb-6">
                         <h3 class="font-medium mb-2">Quantity</h3>
                         <div class="flex">
-                            <button class="bg-gray-200 px-3 py-1 rounded-l">-</button>
-                            <input type="text" value="1" class="w-16 text-center border-t border-b">
-                            <button class="bg-gray-200 px-3 py-1 rounded-r">+</button>
+                            <button class="cursor-pointer bg-gray-200 px-3 py-1 rounded-l" @click="$store.productDetail.decrementQuantity()">-</button>
+                            <input type="text" x-model="$store.productDetail.quantity" class="w-16 text-center border-t border-b">
+                            <button class="cursor-pointer bg-gray-200 px-3 py-1 rounded-r" @click="$store.productDetail.incrementQuantity()">+</button>
                         </div>
                     </div>
 
                     <!-- Add to Cart Button -->
                     <div class="flex space-x-4 mb-6">
-                        <button x-on:click="$dispatch('notify', {  variant: 'info', title: 'Update Available', message: 'A new version of the app is ready for you. Update now to enjoy the latest features!' })" class="bg-emerald-600 text-white px-8 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Add to Cart</button>
+                        <button @click='$store.cart.addToCart(@json($product), $store.productDetail.quantity)' class="bg-emerald-600 text-white px-8 py-3 rounded-md font-medium hover:bg-emerald-700 transition cursor-pointer">Add to Cart</button>
                         <button class="border border-gray-300 px-3 py-3 rounded-md hover:bg-gray-100 transition">
                             <i class="far fa-heart"></i>
                         </button>
@@ -104,25 +104,20 @@
                 </div>
             </div>
 
-            <!-- Product Tabs -->
-            <div class="mt-16">
-                <div class="border-b border-gray-200">
-                    <div class="flex -mb-px">
-                        <button class="py-4 px-6 border-b-2 border-emerald-600 font-medium text-emerald-600">Description</button>
-                        <button class="py-4 px-6 text-gray-600 font-medium">Reviews ({{ $product->reviews()->count() }})</button>
-                    </div>
+            <x-tabs :tabs="['description' => 'Description', 'reviews' => 'Reviews (' . $product->reviews()->count() . ')']">
+                <div x-show="tab === 'description'">
+                    <h3 class="text-xl font-bold mb-4">Product Description</h3>
+                    <p>Experience premium sound quality with our Wireless Headphones. Designed for comfort and performance, these headphones deliver exceptional audio clarity and powerful bass.</p>
+                    <p>The active noise cancellation technology blocks out ambient noise, allowing you to focus on your music or work without distractions. With up to 30 hours of battery life, you can enjoy your favorite tunes all day long.</p>
+                    <p>The built-in microphone ensures crystal-clear calls, while the Bluetooth 5.0 connectivity provides a stable and seamless connection to your devices. The comfortable over-ear design with soft cushions makes these headphones perfect for extended listening sessions.</p>
+                    <p>Whether you're a music enthusiast, a professional working from home, or a frequent traveler, these wireless headphones are the perfect companion for your audio needs.</p>
                 </div>
 
-                <div class="py-6">
-                    <h3 class="text-xl font-bold mb-4">Product Description</h3>
-                    <div class="text-gray-700 space-y-4">
-                        <p>Experience premium sound quality with our Wireless Headphones. Designed for comfort and performance, these headphones deliver exceptional audio clarity and powerful bass.</p>
-                        <p>The active noise cancellation technology blocks out ambient noise, allowing you to focus on your music or work without distractions. With up to 30 hours of battery life, you can enjoy your favorite tunes all day long.</p>
-                        <p>The built-in microphone ensures crystal-clear calls, while the Bluetooth 5.0 connectivity provides a stable and seamless connection to your devices. The comfortable over-ear design with soft cushions makes these headphones perfect for extended listening sessions.</p>
-                        <p>Whether you're a music enthusiast, a professional working from home, or a frequent traveler, these wireless headphones are the perfect companion for your audio needs.</p>
-                    </div>
+                <div x-show="tab === 'reviews'">
+                    <h3 class="text-xl font-bold mb-4">Customer Reviews</h3>
+                    <p class="text-gray-700">No reviews yet. Be the first to write one!</p>
                 </div>
-            </div>
+            </x-tabs>
 
             <!-- Related Products -->
             <div class="mt-16">

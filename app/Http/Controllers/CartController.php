@@ -9,9 +9,14 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartProducts = json_decode(json_encode((object) session()->get('cart', [])), false);
+        return view('pages.cart.index');
+    }
 
-        return view('pages.cart.index', compact('cartProducts'));
+    public function store(Request $request)
+    {
+        session()->put('cart', $request->items);
+
+        return response()->noContent();
     }
 
     public function addItem($productId)

@@ -1,25 +1,21 @@
-export default () => ({
+import {dispatch} from "alpinejs/src/utils/dispatch.js";
+
+export default {
+    init() {
+        // Load cart from localStorage
+        const savedCart = localStorage.getItem('cart');
+
+        if (savedCart) {
+            this.items = JSON.parse(savedCart);
+        }
+    },
+
     items: [],
     promoCode: '',
     promoDiscount: 0,
     promoMessage: { text: '', type: '' },
-    taxRate: 0.08,
-
-    init() {
-        // Load cart from localStorage
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
-            this.items = JSON.parse(savedCart);
-        } else {
-            // Sample data for demonstration
-            this.items = [
-                { id: 1, name: 'Wireless Headphones', color: 'Black', price: 129.99, quantity: 1, image: '/placeholder.svg?height=100&width=100' },
-                { id: 2, name: 'Smart Watch', color: 'Silver', price: 199.99, quantity: 1, image: '/placeholder.svg?height=100&width=100' },
-                { id: 3, name: 'Bluetooth Speaker', color: 'Blue', price: 69.99, quantity: 1, image: '/placeholder.svg?height=100&width=100' }
-            ];
-            this.saveCart();
-        }
-    },
+    taxRate: 0.0,
+    quantity: 1,
 
     get totalItems() {
         return this.items.reduce((total, item) => total + item.quantity, 0);
@@ -38,7 +34,53 @@ export default () => ({
     },
 
     formatCurrency(value) {
-        return '$' + value.toFixed(2);
+        return '৳' + value.toLocaleString();
+    },
+
+
+    addToCart(product, quantity) {
+        console.log({product, quantity})
+        // Get current cart or initialize empty array
+        let cart = [];
+        const savedCart = localStorage.getItem('cart');
+
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+        }
+
+        // Check if product already in cart
+        const existingItemIndex = cart.findIndex(item =>
+            item.id === product.id
+        );
+
+        if (existingItemIndex >= 0) {
+            // Update quantity if product already in cart
+            cart[existingItemIndex].quantity += quantity;
+            // Cap at 10 items
+            if (cart[existingItemIndex].quantity > 10) {
+                cart[existingItemIndex].quantity = 10;
+            }
+        } else {
+            // Add new item to cart
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: quantity,
+                image: product?.images.length ? product.images[0] : product.image_path
+            });
+        }
+
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        const event = new CustomEvent('notify', {
+            detail: {
+                title: `${quantity} ${product.name} added to your cart.`
+            }
+        })
+
+        window.dispatchEvent(event)
     },
 
     incrementQuantity(index) {
@@ -56,6 +98,8 @@ export default () => ({
     },
 
     updateQuantity(index, event) {
+        dispatch('notify', {  variant: 'info', title: 'Update Available', message: 'A new version of the app is ready for you. Update now to enjoy the latest features!' })
+
         let value = parseInt(event.target.value);
         if (isNaN(value) || value < 1) {
             value = 1;
@@ -105,5 +149,25 @@ export default () => ({
 
     saveCart() {
         localStorage.setItem('cart', JSON.stringify(this.items));
+    },
+
+    clearCart() {
+        this.items = [];
+        localStorage.removeItem('cart');
+        localStorage.removeItem('cartTotal');
+    },
+
+    async saveCartToSession() {
+        await fetch('/cart', {
+            method: 'post',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                items: this.items
+            })
+        })
     }
-})
+}

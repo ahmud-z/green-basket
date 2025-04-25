@@ -6,28 +6,28 @@
                 <div class="w-1/3 text-center">
                     <div class="relative">
                         <div
-                            class="h-12 w-12 rounded-full bg-emerald-600 text-white flex items-center justify-center mx-auto">
+                            class="h-12 w-12 rounded-full {{ Str::endsWith(url()->current(), 'shipping') ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600' }} flex items-center justify-center mx-auto">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <p class="mt-2 font-medium text-emerald-600">Shipping</p>
+                        <p class="mt-2 font-medium {{ Str::endsWith(url()->current(), 'shipping') ? 'text-emerald-600' : 'text-gray-600' }}">Shipping</p>
                     </div>
                 </div>
                 <div class="w-1/3 text-center">
                     <div class="relative">
                         <div
-                            class="h-12 w-12 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center mx-auto">
+                            class="h-12 w-12 rounded-full {{ Str::endsWith(url()->current(), 'payment') ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600' }} flex items-center justify-center mx-auto">
                             <i class="fas fa-credit-card"></i>
                         </div>
-                        <p class="mt-2 font-medium text-gray-600">Payment</p>
+                        <p class="mt-2 font-medium {{ Str::endsWith(url()->current(), 'payment') ? 'text-emerald-600' : 'text-gray-600' }}">Payment</p>
                     </div>
                 </div>
                 <div class="w-1/3 text-center">
                     <div class="relative">
                         <div
-                            class="h-12 w-12 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center mx-auto">
+                            class="h-12 w-12 rounded-full bg-gray-200 {{ Str::endsWith(url()->current(), 'confirm') ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600' }} flex items-center justify-center mx-auto">
                             <i class="fas fa-check"></i>
                         </div>
-                        <p class="mt-2 font-medium text-gray-600">Confirmation</p>
+                        <p class="mt-2 font-medium {{ Str::endsWith(url()->current(), 'confirm') ? 'text-emerald-600' : 'text-gray-600' }}">Confirmation</p>
                     </div>
                 </div>
             </div>

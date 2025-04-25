@@ -3,15 +3,13 @@ import Alpine from 'alpinejs'
 import cart from "./alpine-apps/cart.js";
 import checkout from "./alpine-apps/checkout.js";
 import productDetail from "./alpine-apps/product-detail.js";
+import {mask} from "@alpinejs/mask";
 
 window.Alpine = Alpine
 
-Alpine.store('cart', {
-    on: false,
-})
+Alpine.plugin(mask)
 
-Alpine.data('cart', cart)
-Alpine.data('productDetail', productDetail)
-Alpine.data('checkout', checkout)
+Alpine.store('cart', cart)
+Alpine.store('productDetail', productDetail)
 
 Alpine.start()

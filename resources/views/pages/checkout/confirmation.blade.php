@@ -4,7 +4,7 @@
     @include('components.checkout-progress')
 
     <!-- Confirmation Section -->
-    <section class="py-12">
+    <section class="py-12" x-data x-init="$store.cart.clearCart()">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto bg-white rounded-lg shadow overflow-hidden">
                 <div class="p-6 border-b bg-green-50">
@@ -25,19 +25,19 @@
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div>
                                 <p class="text-gray-600">Order Number</p>
-                                <p class="font-medium">#ORD-12345678</p>
+                                <p class="font-medium">#ORD-{{ $order->id }}</p>
                             </div>
                             <div>
                                 <p class="text-gray-600">Date</p>
-                                <p class="font-medium">April 17, 2023</p>
+                                <p class="font-medium">{{ $order->created_at->format('Y-M-d') }}</p>
                             </div>
                             <div>
                                 <p class="text-gray-600">Total</p>
-                                <p class="font-medium">$431.97</p>
+                                <p class="font-medium">{{ $order->total }}</p>
                             </div>
                             <div>
                                 <p class="text-gray-600">Payment Method</p>
-                                <p class="font-medium">Credit Card (•••• 1234)</p>
+                                <p class="font-medium">Credit Card</p>
                             </div>
                         </div>
                     </div>
@@ -64,83 +64,41 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-10 w-10 flex-shrink-0">
-                                                <img src="/placeholder.svg?height=100&width=100" alt="Wireless Headphones"
-                                                     class="h-10 w-10 rounded">
+                                @foreach($order->items as $item)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <img src="{{ $item->product->image_path }}" alt="Wireless Headphones"
+                                                         class="h-10 w-10 rounded">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">{{ $item->product->name }}</div>
+                                                    <div class="text-sm text-gray-500">Black</div>
+                                                </div>
                                             </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Wireless Headphones</div>
-                                                <div class="text-sm text-gray-500">Black</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">1</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        $129.99
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-10 w-10 flex-shrink-0">
-                                                <img src="/placeholder.svg?height=100&width=100" alt="Smart Watch"
-                                                     class="h-10 w-10 rounded">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Smart Watch</div>
-                                                <div class="text-sm text-gray-500">Silver</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">1</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        $199.99
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-10 w-10 flex-shrink-0">
-                                                <img src="/placeholder.svg?height=100&width=100" alt="Bluetooth Speaker"
-                                                     class="h-10 w-10 rounded">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Bluetooth Speaker</div>
-                                                <div class="text-sm text-gray-500">Blue</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">1</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        $69.99
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{ $item->quantity }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            {{ $item->price * $item->quantity }}
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot class="bg-gray-50">
                                 <tr>
                                     <td class="px-6 py-3 text-sm font-medium text-gray-900" colspan="2">Subtotal</td>
-                                    <td class="px-6 py-3 text-right text-sm font-medium text-gray-900">$399.97</td>
+                                    <td class="px-6 py-3 text-right text-sm font-medium text-gray-900">${{ $order->total }}</td>
                                 </tr>
                                 <tr>
                                     <td class="px-6 py-3 text-sm font-medium text-gray-900" colspan="2">Shipping</td>
                                     <td class="px-6 py-3 text-right text-sm font-medium text-gray-900">Free</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-6 py-3 text-sm font-medium text-gray-900" colspan="2">Tax</td>
-                                    <td class="px-6 py-3 text-right text-sm font-medium text-gray-900">$32.00</td>
-                                </tr>
-                                <tr>
                                     <td class="px-6 py-3 text-base font-bold text-gray-900" colspan="2">Total</td>
-                                    <td class="px-6 py-3 text-right text-base font-bold text-gray-900">$431.97</td>
+                                    <td class="px-6 py-3 text-right text-base font-bold text-gray-900">${{ $order->total }}</td>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -152,12 +110,12 @@
                         <div>
                             <h3 class="text-lg font-medium mb-4">Shipping Information</h3>
                             <div class="border rounded-md p-4">
-                                <p class="font-medium">John Doe</p>
-                                <p>123 Main Street</p>
-                                <p>Apt 4B</p>
-                                <p>New York, NY 10001</p>
-                                <p>United States</p>
-                                <p class="mt-2">Phone: (123) 456-7890</p>
+                                <p class="font-medium">{{ $order->name }}</p>
+                                <p>
+                                    {!! $order->delivery_address !!}
+                                </p>
+
+                                <p class="mt-2">Phone: {{ $order->phone }}</p>
                             </div>
                         </div>
 
@@ -165,7 +123,7 @@
                             <h3 class="text-lg font-medium mb-4">Shipping Method</h3>
                             <div class="border rounded-md p-4">
                                 <p>Standard Shipping</p>
-                                <p class="text-gray-600">Estimated delivery: April 20-22, 2023</p>
+                                <p class="text-gray-600">Estimated delivery: April 20-22, 2025</p>
                             </div>
                         </div>
                     </div>
@@ -203,11 +161,7 @@
 
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="orders.html"
-                           class="bg-emerald-600 text-white px-6 py-3 rounded-md font-medium hover:bg-emerald-700 transition text-center">
-                            View Order Status
-                        </a>
-                        <a href="index.html"
+                        <a href="{{ route('products.index') }}"
                            class="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-md font-medium hover:bg-gray-50 transition text-center">
                             Continue Shopping
                         </a>
