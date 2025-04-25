@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    public function show() {
+    public function show()
+    {
         return view('pages.auth.register');
     }
 
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $credentials = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],

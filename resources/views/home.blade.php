@@ -24,7 +24,7 @@
             <h2 class="text-2xl font-bold mb-8 text-center">Shop by Category</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach($topCategories as $category)
-                    <a href="{{ route('home') }}" class="group">
+                    <a href="{{ route('products.index') }}?category={{ $category->name }}" class="group">
                         <div class="bg-white rounded-lg shadow p-4 text-center hover:shadow-md transition">
                             <img src="{{ $category->image_path }}" alt="{{ $category->name }}" class="mx-auto mb-4 h-32 w-32 object-cover">
                             <h3 class="font-medium group-hover:text-emerald-600">{{ $category->name }}</h3>
@@ -39,7 +39,7 @@
     <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-8 text-center">Featured Products</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach($organicProducts as $product)
                     @include('components.product-card')
                 @endforeach

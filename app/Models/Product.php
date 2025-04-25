@@ -26,7 +26,8 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany(Review::class);
     }
 
@@ -34,6 +35,6 @@ class Product extends Model
     {
         return Attribute::make(
             get: fn () => round($this->reviews()->avg('rating'), 2),
-        );;
+        );
     }
 }

@@ -17,98 +17,38 @@
         <div class="lg:w-2/3">
           <div class="bg-white rounded-lg shadow overflow-hidden">
             <div class="p-6 border-b">
-              <h2 class="text-xl font-bold">Cart Items (3)</h2>
+              <h2 class="text-xl font-bold">Cart Items ({{ count(session()->get('cart', [])) }})</h2>
             </div>
-
-            <!-- Cart Item 1 -->
-            <div class="p-6 border-b flex flex-col sm:flex-row items-center">
-              <div class="sm:w-24 mb-4 sm:mb-0">
-                <img src="/placeholder.svg?height=100&width=100" alt="Wireless Headphones" class="w-full h-auto rounded">
-              </div>
-              <div class="sm:ml-6 flex-grow">
-                <h3 class="font-medium">Wireless Headphones</h3>
-                <p class="text-gray-600 text-sm">Color: Black</p>
-                <div class="flex items-center mt-2">
-                  <button class="text-gray-500 hover:text-emerald-600">
-                    <i class="far fa-heart"></i>
-                    <span class="ml-1 text-sm">Save for later</span>
-                  </button>
-                  <span class="mx-3 text-gray-300">|</span>
-                  <button class="text-gray-500 hover:text-red-600">
-                    <i class="far fa-trash-alt"></i>
-                    <span class="ml-1 text-sm">Remove</span>
-                  </button>
+            @foreach ($cartProducts as $product)
+                <!-- Cart Item 1 -->
+                <div class="p-6 border-b flex flex-col sm:flex-row items-center">
+                <div class="sm:w-24 mb-4 sm:mb-0">
+                  <img src="{{ $product->image_path }}" alt="{{ $product->name }}" class="w-full h-auto rounded">
+                </div>
+                <div class="sm:ml-6 flex-grow">
+                  <h3 class="font-medium">{{ $product->name }}</h3>
+                  <div class="flex items-center mt-2">
+                    <button class="text-gray-500 hover:text-emerald-600">
+                      <i class="far fa-heart"></i>
+                      <span class="ml-1 text-sm">Save for later</span>
+                    </button>
+                    <span class="mx-3 text-gray-300">|</span>
+                    <button class="text-gray-500 hover:text-red-600">
+                      <i class="far fa-trash-alt"></i>
+                      <span class="ml-1 text-sm">Remove</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex items-center mt-4 sm:mt-0">
+                  <div class="flex mr-6">
+                    <button class="bg-gray-200 px-3 py-1 rounded-l">-</button>
+                    <input type="text" value="1" class="w-12 text-center border-t border-b">
+                    <button class="bg-gray-200 px-3 py-1 rounded-r">+</button>
+                  </div>
+                  <div class="font-bold text-lg">${{ $product->price }}</div>
                 </div>
               </div>
-              <div class="flex items-center mt-4 sm:mt-0">
-                <div class="flex mr-6">
-                  <button class="bg-gray-200 px-3 py-1 rounded-l">-</button>
-                  <input type="text" value="1" class="w-12 text-center border-t border-b">
-                  <button class="bg-gray-200 px-3 py-1 rounded-r">+</button>
-                </div>
-                <div class="font-bold text-lg">$129.99</div>
-              </div>
-            </div>
-
-            <!-- Cart Item 2 -->
-            <div class="p-6 border-b flex flex-col sm:flex-row items-center">
-              <div class="sm:w-24 mb-4 sm:mb-0">
-                <img src="/placeholder.svg?height=100&width=100" alt="Smart Watch" class="w-full h-auto rounded">
-              </div>
-              <div class="sm:ml-6 flex-grow">
-                <h3 class="font-medium">Smart Watch</h3>
-                <p class="text-gray-600 text-sm">Color: Silver</p>
-                <div class="flex items-center mt-2">
-                  <button class="text-gray-500 hover:text-emerald-600">
-                    <i class="far fa-heart"></i>
-                    <span class="ml-1 text-sm">Save for later</span>
-                  </button>
-                  <span class="mx-3 text-gray-300">|</span>
-                  <button class="text-gray-500 hover:text-red-600">
-                    <i class="far fa-trash-alt"></i>
-                    <span class="ml-1 text-sm">Remove</span>
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center mt-4 sm:mt-0">
-                <div class="flex mr-6">
-                  <button class="bg-gray-200 px-3 py-1 rounded-l">-</button>
-                  <input type="text" value="1" class="w-12 text-center border-t border-b">
-                  <button class="bg-gray-200 px-3 py-1 rounded-r">+</button>
-                </div>
-                <div class="font-bold text-lg">$199.99</div>
-              </div>
-            </div>
-
-            <!-- Cart Item 3 -->
-            <div class="p-6 flex flex-col sm:flex-row items-center">
-              <div class="sm:w-24 mb-4 sm:mb-0">
-                <img src="/placeholder.svg?height=100&width=100" alt="Bluetooth Speaker" class="w-full h-auto rounded">
-              </div>
-              <div class="sm:ml-6 flex-grow">
-                <h3 class="font-medium">Bluetooth Speaker</h3>
-                <p class="text-gray-600 text-sm">Color: Blue</p>
-                <div class="flex items-center mt-2">
-                  <button class="text-gray-500 hover:text-emerald-600">
-                    <i class="far fa-heart"></i>
-                    <span class="ml-1 text-sm">Save for later</span>
-                  </button>
-                  <span class="mx-3 text-gray-300">|</span>
-                  <button class="text-gray-500 hover:text-red-600">
-                    <i class="far fa-trash-alt"></i>
-                    <span class="ml-1 text-sm">Remove</span>
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center mt-4 sm:mt-0">
-                <div class="flex mr-6">
-                  <button class="bg-gray-200 px-3 py-1 rounded-l">-</button>
-                  <input type="text" value="1" class="w-12 text-center border-t border-b">
-                  <button class="bg-gray-200 px-3 py-1 rounded-r">+</button>
-                </div>
-                <div class="font-bold text-lg">$69.99</div>
-              </div>
-            </div>
+            @endforeach
           </div>
 
           <!-- Continue Shopping -->
@@ -136,10 +76,6 @@
                   <span class="text-gray-600">Shipping</span>
                   <span>Free</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Tax</span>
-                  <span>$32.00</span>
-                </div>
                 <div class="border-t pt-4 flex justify-between font-bold text-lg">
                   <span>Total</span>
                   <span>$431.97</span>
@@ -157,7 +93,7 @@
 
               <!-- Checkout Button -->
               <div class="mt-6">
-                <a href="checkout.html" class="block bg-emerald-600 text-white text-center px-4 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Proceed to Checkout</a>
+                <a href="{{ route('checkout.shipping') }}" class="block bg-emerald-600 text-white text-center px-4 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Proceed to Checkout</a>
               </div>
 
               <!-- Payment Methods -->

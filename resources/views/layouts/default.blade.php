@@ -9,5 +9,9 @@
 @yield('content')
 
 @include('partials.footer')
+
+@include('components.notifications')
+
+@vite('resources/js/app.js')
 </body>
 </html>

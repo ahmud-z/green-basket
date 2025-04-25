@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Breadcrumbs -->
-    <div class="bg-white py-4 border-b">
+    <div class="bg-white py-4 border-y">
         <div class="container mx-auto px-4">
             <div class="flex text-sm">
                 <a href="index.html" class="text-gray-600 hover:text-emerald-600">Home</a>
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Product Detail -->
-    <section class="py-12">
+    <section class="py-12" x-data="productDetail">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row -mx-4">
                 <!-- Product Images -->
@@ -71,7 +71,7 @@
 
                     <!-- Add to Cart Button -->
                     <div class="flex space-x-4 mb-6">
-                        <button class="bg-emerald-600 text-white px-8 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Add to Cart</button>
+                        <button x-on:click="$dispatch('notify', {  variant: 'info', title: 'Update Available', message: 'A new version of the app is ready for you. Update now to enjoy the latest features!' })" class="bg-emerald-600 text-white px-8 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Add to Cart</button>
                         <button class="border border-gray-300 px-3 py-3 rounded-md hover:bg-gray-100 transition">
                             <i class="far fa-heart"></i>
                         </button>

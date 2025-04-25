@@ -4,7 +4,7 @@
         <div class="p-4">
             <h3 class="font-medium mb-2">{{ $product->name }}</h3>
 
-            <div class="flex items-center text-yellow-400" mb-2">
+            <div class="flex items-center text-yellow-400 mb-2">
                 @for ($i = 0; $i < 5; $i++)
                     @if (floor($product->average_rating) - $i >= 1)
                         <i class="fas fa-star"></i>
@@ -16,11 +16,11 @@
                 @endfor
 
                 <span class="text-gray-600 ml-2">{{ $product->average_rating }} ({{ $product->reviews->count() }} reviews)</span>
-              </div>
-            <p class="text-gray-600 text-sm mb-2">{{ $product->description }}</p>
+            </div>
             <div class="flex justify-between items-center">
                 <span class="font-bold text-lg">৳{{ $product->price }}</span>
-                <button class="bg-emerald-600 text-white px-3 py-1 rounded text-sm hover:bg-emerald-700">Add to Cart</button>
+                <a class="bg-emerald-600 cursor-pointer text-white px-3 py-1 rounded text-sm hover:bg-emerald-700"
+                   href={{ route('cart.add-item', $product->id) }}>Add to Cart</a>
             </div>
         </div>
     </a>
