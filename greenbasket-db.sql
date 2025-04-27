@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: greenbasket
--- Generation Time: 2025-04-17 02:31:57.1160
+-- Generation Time: 2025-04-27 10:20:03.8470
 -- -------------------------------------------------------------
 
 
@@ -91,7 +91,44 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `order_items`;
+CREATE TABLE `order_items` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `product_id` bigint unsigned NOT NULL,
+  `price` decimal(8,2) NOT NULL,
+  `quantity` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_items_order_id_foreign` (`order_id`),
+  KEY `order_items_product_id_foreign` (`product_id`),
+  CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instructions` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders_user_id_foreign` (`user_id`),
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `password_reset_tokens`;
 CREATE TABLE `password_reset_tokens` (
@@ -143,7 +180,7 @@ CREATE TABLE `reviews` (
   PRIMARY KEY (`id`),
   KEY `reviews_product_id_foreign` (`product_id`),
   CONSTRAINT `reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
@@ -170,7 +207,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`, `image_path`) VALUES
 (1, 'Fragrances', '2025-04-16 19:10:27', '2025-04-16 19:10:27', 'https://freepngimg.com/thumb/perfume/4-2-perfume-png-hd-thumb.png'),
@@ -188,7 +225,49 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2025_04_16_143710_create_categories_table', 1),
 (5, '2025_04_16_143718_create_products_table', 1),
 (6, '2025_04_16_165814_create_product_images_table', 1),
-(7, '2025_04_16_183635_create_reviews_table', 1);
+(7, '2025_04_16_183635_create_reviews_table', 1),
+(8, '2025_04_16_193457_create_orders_table', 2),
+(9, '2025_04_16_193502_create_order_items_table', 2);
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `price`, `quantity`, `created_at`, `updated_at`) VALUES
+(1, 3, 18, 2.99, 2, '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(2, 3, 1, 49.99, 2, '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(3, 3, 2, 129.99, 1, '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(4, 3, 15, 4.99, 2, '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(5, 3, 13, 8.99, 1, '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(6, 3, 12, 12.99, 2, '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(7, 4, 18, 2.99, 2, '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(8, 4, 1, 49.99, 2, '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(9, 4, 2, 129.99, 1, '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(10, 4, 15, 4.99, 2, '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(11, 4, 13, 8.99, 1, '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(12, 4, 12, 12.99, 2, '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(13, 5, 18, 2.99, 2, '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(14, 5, 1, 49.99, 2, '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(15, 5, 2, 129.99, 1, '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(16, 5, 15, 4.99, 2, '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(17, 5, 13, 8.99, 1, '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(18, 5, 12, 12.99, 2, '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(19, 6, 18, 2.99, 2, '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(20, 6, 1, 49.99, 2, '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(21, 6, 2, 129.99, 1, '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(22, 6, 15, 4.99, 2, '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(23, 6, 13, 8.99, 1, '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(24, 6, 12, 12.99, 2, '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(25, 7, 12, 12.99, 1, '2025-04-25 16:22:01', '2025-04-25 16:22:01'),
+(26, 8, 1, 49.99, 3, '2025-04-25 16:27:25', '2025-04-25 16:27:25'),
+(27, 8, 2, 129.99, 1, '2025-04-25 16:27:25', '2025-04-25 16:27:25'),
+(28, 8, 3, 89.99, 1, '2025-04-25 16:27:25', '2025-04-25 16:27:25');
+
+INSERT INTO `orders` (`id`, `user_id`, `email`, `phone`, `name`, `address`, `city`, `state`, `zip`, `country`, `shipping_method`, `instructions`, `created_at`, `updated_at`) VALUES
+(1, 5, 'tevyf@mailinator.com', '+1 (239) 661-1429', 'Yardley Stone', 'Exercitationem accus', 'Praesentium hic dign', 'CT', '61658', 'UK', 'standard', 'Non eos nisi ipsam n', '2025-04-25 16:07:30', '2025-04-25 16:07:30'),
+(2, 5, 'tevyf@mailinator.com', '+1 (239) 661-1429', 'Yardley Stone', 'Exercitationem accus', 'Praesentium hic dign', 'CT', '61658', 'UK', 'standard', 'Non eos nisi ipsam n', '2025-04-25 16:07:32', '2025-04-25 16:07:32'),
+(3, 5, 'tevyf@mailinator.com', '+1 (239) 661-1429', 'Yardley Stone', 'Exercitationem accus', 'Praesentium hic dign', 'CT', '61658', 'UK', 'standard', 'Non eos nisi ipsam n', '2025-04-25 16:07:40', '2025-04-25 16:07:40'),
+(4, 5, 'tevyf@mailinator.com', '+1 (239) 661-1429', 'Yardley Stone', 'Exercitationem accus', 'Praesentium hic dign', 'CT', '61658', 'UK', 'standard', 'Non eos nisi ipsam n', '2025-04-25 16:07:42', '2025-04-25 16:07:42'),
+(5, 5, 'tevyf@mailinator.com', '+1 (239) 661-1429', 'Yardley Stone', 'Exercitationem accus', 'Praesentium hic dign', 'CT', '61658', 'UK', 'standard', 'Non eos nisi ipsam n', '2025-04-25 16:07:53', '2025-04-25 16:07:53'),
+(6, 5, 'tevyf@mailinator.com', '+1 (239) 661-1429', 'Yardley Stone', 'Exercitationem accus', 'Praesentium hic dign', 'CT', '61658', 'UK', 'standard', 'Non eos nisi ipsam n', '2025-04-25 16:07:57', '2025-04-25 16:07:57'),
+(7, 5, 'zalibyb@mailinator.com', '+1 (579) 665-8403', 'Natalie Richard', 'Similique perferendi', 'Blanditiis sint sunt', 'CO', '80608', 'US', 'standard', 'Anim velit voluptate', '2025-04-25 16:22:01', '2025-04-25 16:22:01'),
+(8, 5, 'byhow@mailinator.com', '+1 (816) 994-9173', 'Leandra Wood', 'Fugiat dignissimos m', 'Id magni culpa repr', 'CO', '55166', 'CA', 'standard', 'Nam sint provident', '2025-04-25 16:27:25', '2025-04-25 16:27:25');
 
 INSERT INTO `products` (`id`, `name`, `tags`, `category_id`, `price`, `stock_quantity`, `image_path`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Calvin Klein CK One', '[\"fragrances\", \"perfumes\"]', 1, 49.99, 17, 'https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/thumbnail.png', 'CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It\'s a versatile fragrance suitable for everyday wear.', '2025-04-16 19:10:27', '2025-04-16 19:10:27'),
@@ -272,9 +351,19 @@ INSERT INTO `products` (`id`, `name`, `tags`, `category_id`, `price`, `stock_qua
 (79, 'Party Glasses', '[\"eyewear\", \"party glasses\"]', 7, 19.99, 35, 'https://cdn.dummyjson.com/products/images/sunglasses/Party%20Glasses/thumbnail.png', 'The Party Glasses are designed to add flair to your party outfit. With unique shapes or colorful frames, they\'re perfect for adding a playful touch to your look during celebrations.', '2025-04-16 19:11:01', '2025-04-16 19:11:01'),
 (80, 'Sunglasses', '[\"eyewear\", \"sunglasses\"]', 7, 22.99, 59, 'https://cdn.dummyjson.com/products/images/sunglasses/Sunglasses/thumbnail.png', 'The Sunglasses offer a classic and simple design with a focus on functionality. These sunglasses provide essential UV protection while maintaining a timeless look.', '2025-04-16 19:11:01', '2025-04-16 19:11:01');
 
+INSERT INTO `reviews` (`id`, `product_id`, `reviewer_name`, `reviewer_email`, `rating`, `content`, `created_at`, `updated_at`) VALUES
+(1, 61, 'Anonymous', NULL, 4, 'Not very good', NULL, NULL),
+(2, 61, 'Anonymous', NULL, 3, 'Not very good', NULL, NULL);
+
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('xYvcrltZzhArt0ZekkzPqaUMWVQLKUbiU1pZ26re', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiamFscUdYd0pVcTNlUWkxbUNCUTBVcmFMbVdsS3lhN1NWWEJxSnNKWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1744831301),
-('y2ktXrs59DcQnCncTD1w3TFKGw4X5iX54RXbSLCV', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNmFyd2E2aDJGZkQwRXJBVUgyaGRsSnFXSXNienNGWnJTeUNKcWdDciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1744835133);
+('csqWeNSxDrNFYYy05pMS5BPIPYgL8IqGWmWuBPsm', 5, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMHB4YUtNVWJWcnJUNUhPSmJYMFJ3aU1xZEdPMEtlbDF1eUZmNGJnSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9jaGVja291dC9zaGlwcGluZyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjU7fQ==', 1745599594);
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Colin Love', 'hytyxokusu@mailinator.com', NULL, '$2y$12$VGXluv5TbbHuiYbfQ9wkteKn1d57WbAOduVb7odaA9RU9Xxkuc72.', NULL, '2025-04-17 14:45:13', '2025-04-17 14:45:13'),
+(2, 'Noelani Boone', 'lafybije@mailinator.com', NULL, '$2y$12$VGXluv5TbbHuiYbfQ9wkteKn1d57WbAOduVb7odaA9RU9Xxkuc72.', NULL, '2025-04-17 14:45:23', '2025-04-17 14:45:23'),
+(3, 'Dieter Mccormick', 'wyvi@mailinator.com', NULL, '$2y$12$VGXluv5TbbHuiYbfQ9wkteKn1d57WbAOduVb7odaA9RU9Xxkuc72.', NULL, '2025-04-17 14:49:23', '2025-04-17 14:49:23'),
+(4, 'Abbot Beck', 'heqyt@mailinator.com', NULL, '$2y$12$VGXluv5TbbHuiYbfQ9wkteKn1d57WbAOduVb7odaA9RU9Xxkuc72.', NULL, '2025-04-25 12:19:50', '2025-04-25 12:19:50'),
+(5, 'Rosalyn Price', 'febyk@mailinator.com', NULL, '$2y$12$VGXluv5TbbHuiYbfQ9wkteKn1d57WbAOduVb7odaA9RU9Xxkuc72.', NULL, '2025-04-25 13:42:48', '2025-04-25 13:42:48');
 
 
 
