@@ -24,10 +24,10 @@
                 <div class="w-1/3 text-center">
                     <div class="relative">
                         <div
-                            class="h-12 w-12 rounded-full bg-gray-200 {{ Str::endsWith(url()->current(), 'confirm') ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600' }} flex items-center justify-center mx-auto">
+                            class="h-12 w-12 rounded-full {{ Str::contains(url()->current(), 'confirmation') ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600' }} flex items-center justify-center mx-auto">
                             <i class="fas fa-check"></i>
                         </div>
-                        <p class="mt-2 font-medium {{ Str::endsWith(url()->current(), 'confirm') ? 'text-emerald-600' : 'text-gray-600' }}">Confirmation</p>
+                        <p class="mt-2 font-medium {{ Str::contains(url()->current(), 'confirmation') ? 'text-emerald-600' : 'text-gray-600' }}">Confirmation</p>
                     </div>
                 </div>
             </div>
