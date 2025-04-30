@@ -25,13 +25,30 @@ class DatabaseSeeder extends Seeder
         //        ]);
 
         $categories = [
-            'fragrances',
-            'furniture',
-            'groceries',
-            'home-decoration',
-            'kitchen-accessories',
-            'skin-care',
-            'sunglasses',
+            "beauty",
+            "fragrances",
+            "furniture",
+            "groceries",
+            "home-decoration",
+            "kitchen-accessories",
+            "laptops",
+            "mens-shirts",
+            "mens-shoes",
+            "mens-watches",
+            "mobile-accessories",
+            "motorcycle",
+            "skin-care",
+            "smartphones",
+            "sports-accessories",
+            "sunglasses",
+            "tablets",
+            "tops",
+            "vehicle",
+            "womens-bags",
+            "womens-dresses",
+            "womens-jewellery",
+            "womens-shoes",
+            "womens-watches"
         ];
 
         foreach ($categories as $category) {
@@ -42,7 +59,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             foreach ($response['products'] as $product) {
-                $product = $category->products()->create([
+                $dbProduct = $category->products()->create([
                     'name' => $product['title'],
                     'tags' => $product['tags'],
                     'price' => $product['price'],
@@ -52,17 +69,17 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 foreach ($product['images'] as $image) {
-                    $product->images()->create([
+                    $dbProduct->images()->create([
                         'path' => $image,
                     ]);
                 }
 
                 foreach ($product['reviews'] as $review) {
-                    $product->reviews()->create([
+                    $dbProduct->reviews()->create([
                         'rating' => $review['rating'],
                         'content' => $review['comment'],
-                        'reviewer_name' => $review['reviewer_name'],
-                        'reviewer_email' => $review['reviewer_email'],
+                        'reviewer_name' => $review['reviewerName'],
+                        'reviewer_email' => $review['reviewerEmail'],
                         'created_at' => Carbon::parse($review['date']),
                     ]);
                 }
