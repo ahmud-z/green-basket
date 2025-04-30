@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Http;
 
 class ProductController extends Controller
 {
@@ -29,9 +30,9 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($productId)->load('category');
 
-        $relatedProducts = Product::where('category_id', $product->category_id)
-            ->limit(8)
-            ->get();
+        $relatedProductIds = Http::get('https://green-basket-recommendation-api.onrender.com/?product_name=' . $product->name)->json();
+
+        $relatedProducts = Product::whereIn('id', $relatedProductIds['products'])->get();
 
         return view('pages.products.show', compact('product', 'relatedProducts'));
     }
