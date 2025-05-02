@@ -30,9 +30,15 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($productId)->load('category');
 
-        $relatedProductIds = Http::get('https://green-basket-recommendation-api.onrender.com/?product_name=' . $product->name)->json();
+        $relatedProducts = [];
 
-        $relatedProducts = Product::whereIn('id', $relatedProductIds['products'])->get();
+        try {
+
+            $relatedProductIds = Http::get('https://green-basket-recommendation-api.onrender.com/?product_name=' . $product->name)->json();
+
+            $relatedProducts = Product::whereIn('id', $relatedProductIds['products'])->get();
+        } catch (\Throwable $th) {}
+
 
         return view('pages.products.show', compact('product', 'relatedProducts'));
     }

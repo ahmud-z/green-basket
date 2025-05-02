@@ -37,4 +37,9 @@ class Product extends Model
             get: fn () => round($this->reviews()->avg('rating'), 2),
         );
     }
+
+    public function orderItem(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(OrderItem::class, 'id', 'product_id');
+    }
 }

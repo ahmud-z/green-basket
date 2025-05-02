@@ -11,10 +11,16 @@ class HomeController extends Controller
     {
         $category = Category::where('name', 'Groceries')->first();
 
-        $organicProducts = Product::where('category_id', $category->id)->take(8)->get();
+        $organicProducts = Product::where('category_id', $category->id)->take(10)->get();
 
         $topCategories = Category::take(4)->get();
 
-        return view('home', compact('organicProducts', 'topCategories'));
+        $topSellingProducts = Product::query()
+            ->withCount('orderItem')
+            ->orderBy('order_item_count', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('home', compact('organicProducts', 'topCategories', 'topSellingProducts'));
     }
 }

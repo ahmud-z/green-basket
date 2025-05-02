@@ -3,7 +3,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="bg-emerald-50 py-12 md:py-20">
+    <section class="py-12 md:py-10 bg-[url('https://nest-frontend-v6.vercel.app/assets/imgs/banner/banner-12.png')] bg-no-repeat">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-8 md:mb-0">
@@ -18,6 +18,8 @@
         </div>
     </section>
 
+    @include('components.hero')
+
     <!-- Featured Categories -->
     <section class="py-12">
         <div class="container mx-auto px-4">
@@ -26,7 +28,8 @@
                 @foreach($topCategories as $category)
                     <a href="{{ route('products.index') }}?category={{ $category->name }}" class="group">
                         <div class="bg-white rounded-lg shadow p-4 text-center hover:shadow-md transition">
-                            <img src="{{ $category->image_path }}" alt="{{ $category->name }}" class="mx-auto mb-4 h-32 w-32 object-cover">
+                            <img src="{{ $category->image_path }}" alt="{{ $category->name }}"
+                                 class="mx-auto mb-4 h-32 w-32 object-cover">
                             <h3 class="font-medium group-hover:text-emerald-600">{{ $category->name }}</h3>
                         </div>
                     </a>
@@ -39,8 +42,20 @@
     <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-8 text-center">Featured Products</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 @foreach($organicProducts as $product)
+                    @include('components.product-card')
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">Top Selling Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                @foreach($topSellingProducts as $product)
                     @include('components.product-card')
                 @endforeach
             </div>
@@ -53,8 +68,12 @@
             <h2 class="text-2xl font-bold mb-4">Subscribe to Our Newsletter</h2>
             <p class="mb-6 max-w-md mx-auto">Stay updated with our latest products and exclusive offers.</p>
             <form class="max-w-md mx-auto flex">
-                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded-l-md border-2 border-emerald-600 focus:outline-none">
-                <button type="submit" class="bg-emerald-600 text-white px-6 py-2 rounded-r-md font-medium hover:bg-emerald-700 transition">Subscribe</button>
+                <input type="email" placeholder="Your email address"
+                       class="flex-grow px-4 py-2 rounded-l-md border-2 border-emerald-600 focus:outline-none">
+                <button type="submit"
+                        class="bg-emerald-600 text-white px-6 py-2 rounded-r-md font-medium hover:bg-emerald-700 transition">
+                    Subscribe
+                </button>
             </form>
         </div>
     </section>
