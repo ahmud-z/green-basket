@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -18,6 +19,8 @@ Route::get('/cart/add-item/{productId}', [CartController::class, 'addItem'])->na
 Route::get('/cart/remove-item/{productId}', [CartController::class, 'removeItem'])->name('cart.remove-item');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/{productId}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
     Route::get('/checkout/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
     Route::post('/checkout/shipping', [CheckoutController::class, 'saveShipping']);
 

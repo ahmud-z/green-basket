@@ -115,7 +115,7 @@
 
                 <div x-show="tab === 'reviews'">
                     <h3 class="text-xl font-bold mb-4">Customer Reviews</h3>
-                    <p class="text-gray-700">No reviews yet. Be the first to write one!</p>
+                    @include('components.product-reviews')
                 </div>
             </x-tabs>
 
