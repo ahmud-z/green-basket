@@ -265,7 +265,7 @@
                             <div class="space-y-4 border-t pt-4">
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Subtotal</span>
-                                    <span x-text="$store.cart.formatCurrency($store.cart.subtotal)">$0</span>
+                                    <span x-text="$store.cart.formatCurrency($store.cart.subtotal)">৳0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Shipping</span>

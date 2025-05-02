@@ -12,7 +12,8 @@
                     <a href="{{ route('products.index') }}" class="bg-emerald-600 text-white px-6 py-3 rounded-md font-medium hover:bg-emerald-700 transition">Shop Now</a>
                 </div>
                 <div class="md:w-1/2">
-                    <img src="https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0-Deploy-Release-757/Default/stores/chaldal/components/landingPage2/LandingPage/images/imageBanner.png?q=low&webp=1" alt="Hero Image">
+                    {{-- <img src="https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0-Deploy-Release-757/Default/stores/chaldal/components/landingPage2/LandingPage/images/imageBanner.png?q=low&webp=1" alt="Hero Image"> --}}
+                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/announcement-of-product-discounts-in-e-commerce-3d-illustration-download-png-blend-fbx-gltf-file-formats--online-shopping-shop-marketing-store-pack-illustrations-6241789.png" alt="Hero Image">
                 </div>
             </div>
         </div>
