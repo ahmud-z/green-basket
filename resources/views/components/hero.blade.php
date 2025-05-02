@@ -25,7 +25,7 @@
                 <div class="relative col-span-full md:col-span-1 bg-[#F2EBD9] rounded-3xl p-8 flex flex-col justify-between overflow-hidden h-72">
                     <div class="max-w-md z-10">
                         <h1 class="text-3xl font-bold text-[#1a2e44] mb-4">
-                            Pure Coffee
+                            Pure Juice
                             <br />
                             Big discount
                         </h1>
