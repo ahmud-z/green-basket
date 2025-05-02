@@ -12,3 +12,7 @@ Alpine.store('cart', cart)
 Alpine.store('productDetail', productDetail)
 
 Alpine.start()
+
+function onApplyFilter() {
+    console.log(1)
+}

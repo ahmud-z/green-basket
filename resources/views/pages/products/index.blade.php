@@ -24,88 +24,20 @@
               <div class="space-y-2">
                 @foreach ($categories as $category)
                     <label class="flex items-center">
-                        <input type="checkbox" class="form-checkbox text-emerald-600 rounded">
+                        <input type="checkbox" name="filter[categories][]" class="form-checkbox text-emerald-600 rounded">
                         <span class="ml-2">{{ $category->name }}</span>
                     </label>
                 @endforeach
               </div>
             </div>
 
-            <!-- Price Range Filter -->
-            <div class="mb-6">
-              <h4 class="font-medium mb-2">Price Range</h4>
-              <div class="space-y-2">
-                <label class="flex items-center">
-                  <input type="radio" name="price" class="form-radio text-emerald-600">
-                  <span class="ml-2">Under $50</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="radio" name="price" class="form-radio text-emerald-600">
-                  <span class="ml-2">$50 - $100</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="radio" name="price" class="form-radio text-emerald-600">
-                  <span class="ml-2">$100 - $200</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="radio" name="price" class="form-radio text-emerald-600">
-                  <span class="ml-2">$200+</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Rating Filter -->
-            <div class="mb-6">
-              <h4 class="font-medium mb-2">Rating</h4>
-              <div class="space-y-2">
-                <label class="flex items-center">
-                  <input type="checkbox" class="form-checkbox text-emerald-600 rounded">
-                  <span class="ml-2 flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                  </span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="form-checkbox text-emerald-600 rounded">
-                  <span class="ml-2 flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="far fa-star text-yellow-400"></i>
-                    <span class="ml-1">& up</span>
-                  </span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="form-checkbox text-emerald-600 rounded">
-                  <span class="ml-2 flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="far fa-star text-yellow-400"></i>
-                    <i class="far fa-star text-yellow-400"></i>
-                    <span class="ml-1">& up</span>
-                  </span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="form-checkbox text-emerald-600 rounded">
-                  <span class="ml-2 flex">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="fas fa-star text-yellow-400"></i>
-                    <i class="far fa-star text-yellow-400"></i>
-                    <i class="far fa-star text-yellow-400"></i>
-                    <i class="far fa-star text-yellow-400"></i>
-                    <span class="ml-1">& up</span>
-                  </span>
-                </label>
-              </div>
-            </div>
-
             <!-- Apply Filters Button -->
-            <button class="w-full bg-emerald-600 text-white py-2 rounded font-medium hover:bg-emerald-700 transition">Apply Filters</button>
+            <button
+                @click="onApplyFilter()"
+                class="w-full bg-emerald-600 text-white py-2 rounded font-medium hover:bg-emerald-700 transition"
+            >
+                Apply Filters
+            </button>
           </div>
         </div>
 

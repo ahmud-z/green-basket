@@ -5,7 +5,7 @@
 
     <div class="p-4">
         <a href="{{ route('products.show', $product->id) }}">
-            <h3 class="font-medium mb-2">{{ $product->name }}</h3>
+            <h3 class="font-medium mb-2 truncate">{{ $product->name }}</h3>
 
             <div class="flex items-center text-yellow-400 mb-2">
                 @for ($i = 0; $i < 5; $i++)

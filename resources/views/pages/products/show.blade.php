@@ -50,14 +50,10 @@
                                 @endif
                             @endfor
                         </div>
-                        <span class="text-gray-600">4.5 ({{ $product->reviews->count() }} reviews)</span>
+                        <span class="text-gray-600">{{ $product->average_rating }} ({{ $product->reviews->count() }} reviews)</span>
                     </div>
 
                     <div class="text-2xl font-bold mb-6">${{ $product->price }}</div>
-
-                    <div class="mb-6">
-                        <p class="text-gray-700 mb-4">{{ $product->description }}</p>
-                    </div>
 
                     <!-- Quantity -->
                     <div class="mb-6">
@@ -107,10 +103,7 @@
             <x-tabs :tabs="['description' => 'Description', 'reviews' => 'Reviews (' . $product->reviews()->count() . ')']">
                 <div x-show="tab === 'description'">
                     <h3 class="text-xl font-bold mb-4">Product Description</h3>
-                    <p>Experience premium sound quality with our Wireless Headphones. Designed for comfort and performance, these headphones deliver exceptional audio clarity and powerful bass.</p>
-                    <p>The active noise cancellation technology blocks out ambient noise, allowing you to focus on your music or work without distractions. With up to 30 hours of battery life, you can enjoy your favorite tunes all day long.</p>
-                    <p>The built-in microphone ensures crystal-clear calls, while the Bluetooth 5.0 connectivity provides a stable and seamless connection to your devices. The comfortable over-ear design with soft cushions makes these headphones perfect for extended listening sessions.</p>
-                    <p>Whether you're a music enthusiast, a professional working from home, or a frequent traveler, these wireless headphones are the perfect companion for your audio needs.</p>
+                    <p class="text-gray-700 mb-4">{{ $product->description }}</p>
                 </div>
 
                 <div x-show="tab === 'reviews'">
