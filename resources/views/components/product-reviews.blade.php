@@ -86,7 +86,7 @@
 
     <!-- Write a Review -->
     <div class="mt-10 border-t pt-8"  x-data="{
-            hoverRating: 0,
+      hoverRating: 0,
       newReview: {
         name: '',
         email: '',
@@ -201,8 +201,8 @@
       },
 
       async submitReview() {
-        if (!this.newReview.rating || !this.newReview.comment || !this.newReview.name || !this.newReview.email) {
-          alert('Please fill in all required fields and accept the terms and conditions.');
+        if (!this.newReview.rating || !this.newReview.comment) {
+          alert('Please fill in all required fields.');
           return;
         }
 
