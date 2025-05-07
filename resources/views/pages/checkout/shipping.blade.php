@@ -168,7 +168,7 @@
                                 <template x-for="(item, index) in $store.cart.items">
                                     <div class="flex">
                                         <div class="w-16 h-16 rounded border overflow-hidden">
-                                            <img :src="item.image" alt="Wireless Headphones"
+                                            <img :src="item.image_path" alt="Wireless Headphones"
                                                  class="w-full h-full object-cover">
                                         </div>
                                         <div class="ml-4 flex-grow">
