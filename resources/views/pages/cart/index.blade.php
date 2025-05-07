@@ -23,7 +23,7 @@
                         <template  x-for="(item, index) in $store.cart.items">
                             <div class="p-6 border-b flex flex-col sm:flex-row items-center">
                                 <div class="sm:w-24 mb-4 sm:mb-0">
-                                    <img :src="item.image"
+                                    <img :src="item.image_path"
                                          class="w-full h-auto rounded border">
                                 </div>
                                 <div class="sm:ml-6 flex-grow">

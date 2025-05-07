@@ -67,7 +67,7 @@ export default {
                 name: product.name,
                 price: product.price,
                 quantity: quantity,
-                image: product?.images.length ? product.images[0] : product.image_path
+                image_path: product.image_path
             });
         }
 
