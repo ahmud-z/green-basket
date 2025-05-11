@@ -11,8 +11,11 @@ Alpine.plugin(mask)
 Alpine.store('cart', cart)
 Alpine.store('productDetail', productDetail)
 
-Alpine.start()
+Alpine.data('filters', () => ({
+    selectedCategories: [],
+    onApplyFilter() {
 
-function onApplyFilter() {
-    console.log(1)
-}
+    }
+}))
+
+Alpine.start()

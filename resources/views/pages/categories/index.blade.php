@@ -15,7 +15,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($categories as $category)
                     <!-- Category 1 -->
-                    <a href="{{ route('products.index') }}?category={{ $category->name }}" class="group">
+                    <a href="{{ route('products.index') }}?filters[categories][]={{ $category->name }}" class="group">
                         <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-md transition">
                             <img src="{{ $category->image_path }}" alt="Electronics"
                                  class="mx-auto mb-4 h-40 w-40 object-cover">

@@ -15,10 +15,24 @@ class ProductController extends Controller
 
         $products = Product::query();
 
-        if (request()->has('category')) {
+        if (count(request('filters.categories')) > 0) {
             $products->whereHas('category', function ($query) {
-                $query->where('name', request()->get('category'));
+                $query->whereIn('name', request('filters.categories', []));
             });
+        }
+
+        if (request('sort') == 'ltoh') {
+            $products->orderBy('price');
+        } elseif (request('sort') == 'htol') {
+            $products->orderBy('price', 'desc');
+        } elseif (request('sort') == 'atoz') {
+            $products->orderBy('name');
+        } elseif (request('sort') == 'ztoa') {
+            $products->orderBy('name', 'desc');
+        } elseif (request('sort') == 'newest') {
+            $products->orderBy('created_at', 'desc');
+        } elseif (request('sort') == 'oldest') {
+            $products->orderBy('created_at');
         }
 
         $products = $products->paginate(9)->withQueryString();
