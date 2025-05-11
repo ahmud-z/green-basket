@@ -23,7 +23,7 @@ class DummyJsonProductSeeder extends Seeder
             "groceries" => "https://freepngimg.com/thumb/healthy_food/9-2-healthy-food-png-picture-thumb.png",
             "home-decoration" => "https://freepngimg.com/thumb/coffee/62185-coffee-cup-tea-chocolate-machine-hot-starbucks-thumb.png",
             "kitchen-accessories" => "https://freepngimg.com/thumb/kettle/161081-kettle-silver-free-photo-thumb.png",
-            "laptops" => "https://nest-frontend-v6.vercel.app/assets/imgs/theme/icons/category-1.svg",
+            "laptops" => "https://spng.pinpng.com/pngs/s/345-3456028_iview-megatron-ii-maximus-iii-laptop-hd-png.png",
             "mens-shirts" => "https://freepngimg.com/thumb/tshirt/36652-7-grey-t-shirt-thumb.png",
             "mens-shoes" => "https://freepngimg.com/thumb/running_shoes/1-running-shoes-png-image-thumb.png",
             "mens-watches" => "https://nest-frontend-v6.vercel.app/assets/imgs/theme/icons/category-1.svg",

@@ -19,11 +19,11 @@ class OrderSeeder extends Seeder
         $productIds = Product::all();
 
         User::all()->each(function ($user) use ($productIds) {
-            // Create 500 orders
             Order::factory()
-                ->count(1000)
+                ->count(rand(10, 30))
                 ->create([
                     'user_id' => $user->id,
+                    'created_at' => now()->subDays(rand(1, 365))
                 ])
                 ->each(function ($order) use ($productIds) {
                     $products = $productIds->random(rand(10, 15));
@@ -34,6 +34,7 @@ class OrderSeeder extends Seeder
                             'product_id' => $product->id,
                             'price' => $product->price,
                             'quantity' => rand(1, 5),
+                            'created_at' => $order->created_at
                         ]);
                     }
                 });
