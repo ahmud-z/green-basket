@@ -15,7 +15,7 @@ class ProductController extends Controller
 
         $products = Product::query();
 
-        if (count(request('filters.categories')) > 0) {
+        if (count(request('filters.categories', [])) > 0) {
             $products->whereHas('category', function ($query) {
                 $query->whereIn('name', request('filters.categories', []));
             });

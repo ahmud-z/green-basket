@@ -30,7 +30,7 @@
                         <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook"></i></a>
                         <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
-                    </li>
+                    </li>       
                 </ul>
             </div>
         </div>
