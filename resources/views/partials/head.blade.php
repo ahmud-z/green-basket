@@ -2,6 +2,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenBasket - Home</title>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    @filamentStyles
 
     @vite('resources/css/app.css')
 
