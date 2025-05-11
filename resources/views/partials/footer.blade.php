@@ -10,17 +10,15 @@
             <div>
                 <h4 class="font-bold mb-4">Shop</h4>
                 <ul class="space-y-2">
-                    <li><a href="categories.html" class="text-gray-300 hover:text-white">Categories</a></li>
-                    <li><a href="products.html" class="text-gray-300 hover:text-white">All Products</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Deals</a></li>
+                    <li><a href={{ route("categories.index") }} class="text-gray-300 hover:text-white">Categories</a></li>
+                    <li><a href={{ route("products.index") }} class="text-gray-300 hover:text-white">All Products</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-bold mb-4">Account</h4>
                 <ul class="space-y-2">
-                    <li><a href="login.html" class="text-gray-300 hover:text-white">Login</a></li>
-                    <li><a href="register.html" class="text-gray-300 hover:text-white">Register</a></li>
-                    <li><a href="orders.html" class="text-gray-300 hover:text-white">Orders</a></li>
+                    <li><a href={{ route("login") }} class="text-gray-300 hover:text-white">Login</a></li>
+                    <li><a href={{ route("register") }} class="text-gray-300 hover:text-white">Register</a></li>
                 </ul>
             </div>
             <div>
